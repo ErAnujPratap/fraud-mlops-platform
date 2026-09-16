@@ -1,7 +1,9 @@
 .venv/
-data/
-models/
-mlruns/
-mlartifacts/
+/data/
+/models/
+/mlruns/
+/mlartifacts/
 __pycache__/
 .ipynb_checkpoints/
+.pytest_cache/
+.DS_Store
