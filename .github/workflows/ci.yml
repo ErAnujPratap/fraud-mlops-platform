@@ -1,0 +1,29 @@
+name: ml-ci
+on:
+  push: { branches: [main] }
+  pull_request:
+
+jobs:
+  train-test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install -r requirements.txt
+      - name: Validate data and train (with model gate)
+        run: make train
+      - name: Test API
+        run: make test
+      - name: Upload model artifact
+        uses: actions/upload-artifact@v4
+        with: { name: model, path: models/ }
+      - name: Build image
+        run: make docker
+      - name: Scan image (DevSecOps)
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: fraud-api:local
+          severity: HIGH,CRITICAL
+          exit-code: "1"
+          ignore-unfixed: true
