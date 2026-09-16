@@ -1,7 +1,7 @@
 .PHONY: setup data train serve test docker up down scan
 
 setup:
-	python -m venv .venv && .venv/bin/pip install -r requirements.txt
+	python3.11 -m venv .venv && .venv/bin/pip install -r requirements.txt
 data:
 	python -m src.data.make_dataset
 train: data

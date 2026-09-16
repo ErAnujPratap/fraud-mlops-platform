@@ -1,5 +1,7 @@
 # Fraud MLOps Platform
 
+![CI](https://github.com//fraud-mlops-platform/actions/workflows/ci.yml/badge.svg)
+
 End-to-end MLOps pipeline for payment fraud detection.
 
 ## Architecture (v0.1)
@@ -12,6 +14,13 @@ data (Kaggle/synthetic) -> validate -> train (XGBoost) -> MLflow tracking + regi
                                   |
                           /metrics -> Prometheus -> Grafana
 ```
+
+## Monitoring
+![Grafana Dashboard](docs/grafana-dashboard.png)
+
+Dashboard JSON: `monitoring/grafana/fraud-model-dashboard.json` (Grafana → Dashboards → Import).
+
+> **macOS note:** port 5000 is used by AirPlay Receiver. Disable it (System Settings → General → AirDrop & Handoff) or map MLflow to 5001.
 
 ## Quick start
 ```bash
